@@ -1,7 +1,19 @@
 import { useStore } from '../store';
 
 function Landing() {
-    const { tasks } = useStore();
+    const { tasks, setGlobalState } = useStore();
+
+    const deleteTask = (index) => {
+        const copy = [...tasks]
+        copy.splice(index, 1);
+
+        setGlobalState(oldState => {
+            return {
+                ...oldState,
+                tasks: [...copy]
+            }
+        });
+    }
 
     return (
         <>
@@ -12,6 +24,7 @@ function Landing() {
                     <div key={index}>
                         <p>Task: {task.text}</p>
                         <p>Username: {task.username}</p>
+                        <button onClick={() => deleteTask(index)}>Delete</button>
                     </div>
                 ))}
             </div>

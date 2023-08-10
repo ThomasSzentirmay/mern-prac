@@ -20,3 +20,11 @@ main.dark {
   background: #777;
   color: #fff;
 }
+
+.tasks div {
+  margin: 10px 0;
+}
+
+.tasks div p {
+  margin: 4px 0;
+}

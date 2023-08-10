@@ -1,4 +1,3 @@
-import {useState} from 'react';
 
 // Pages
 import Landing from './pages/Landing';

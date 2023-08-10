@@ -38,4 +38,4 @@ db.once('open', () => {
         console.log('Express server started on port %s', PORT);
         console.log('GraphQL ready on localhost:%s/graphql', PORT);
     })
-})
+});

@@ -6,9 +6,9 @@ const express = require('express');
 const http = require('http');
 const cors = require('cors');
 
-const { typeDefs, resolvers } = require('./schema');
+const db = require('./db/connection');
 
-const express = require('express');
+const { typeDefs, resolvers } = require('./schema');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -26,16 +26,16 @@ async function startServer() {
       app.use(express.json());
       app.use(cors());
       app.use(expressMiddleware(server, {
-        context: async ({ req }) => ({ token: req.headers.token }),
+        context: async ({ req }) => ({ message: 'This is the context!' }),
       }));
 
-      await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+      await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
 }
 
-// import typeDefs and resolvers
-
-
-
-// Setup our Apollo GraphQL server
-
-app.listen(PORT, () => console.log('Server started on port %s', PORT));
+db.once('open', () => {
+    startServer()
+    .then(() => {
+        console.log('Express server started on port %s', PORT);
+        console.log('GraphQL ready on localhost:%s/graphql', PORT);
+    })
+})

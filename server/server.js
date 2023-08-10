@@ -15,7 +15,7 @@ const httpServer = http.createServer(app);
 const PORT = process.env.PORT || 3333;
 
 async function startServer() {
-    const server = new ApolloServer<MyContext>({
+    const server = new ApolloServer({
         typeDefs,
         resolvers,
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
@@ -34,8 +34,8 @@ async function startServer() {
 
 db.once('open', () => {
     startServer()
-    .then(() => {
-        console.log('Express server started on port %s', PORT);
-        console.log('GraphQL ready on localhost:%s/graphql', PORT);
-    })
+      .then(() => {
+          console.log('Express server started on port %s', PORT);
+          console.log('GraphQL ready on localhost:%s/graphql', PORT);
+      })
 });

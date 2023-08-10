@@ -12,6 +12,15 @@ function Landing(props) {
         });
     }
 
+    const toggleDarkMode = () => {
+        setGlobalState(oldState => {
+            return {
+                ...oldState,
+                darkMode: !oldState.darkMode
+            }
+        });
+    }
+
     return (
         <>
             <h1>Task Manager</h1>
@@ -19,6 +28,10 @@ function Landing(props) {
             <p>{title}</p>
 
             <button onClick={changeTitle}>Change</button>
+
+            <div>
+                <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
+            </div>
         </>
     )
 }

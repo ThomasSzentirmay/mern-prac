@@ -22,11 +22,19 @@ async function startServer() {
       });
       // Ensure we wait for our server to start
       await server.start();
+
+      app.use(express.json());
+      app.use(cors());
+      app.use(expressMiddleware(server, {
+        context: async ({ req }) => ({ token: req.headers.token }),
+      }));
+
+      await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
 }
 
 // import typeDefs and resolvers
 
-app.use(express.json());
+
 
 // Setup our Apollo GraphQL server
 

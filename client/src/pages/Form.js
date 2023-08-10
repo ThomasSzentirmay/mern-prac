@@ -6,14 +6,19 @@ const initial_state = {
   username: ''
 };
 
+const actions = {
+    UPDATE_USERNAME: 'UPDATE_USERNAME',
+    UPDATE_TASK_TEXT: 'UPDATE_TASK_TEXT'
+}
+
 const reducer = (state, actionObj) => {
   switch (actionObj.type) {
-    case 'UPDATE_USERNAME':
+    case actions.UPDATE_USERNAME:
       return {
         ...state,
         username: actionObj.payload
       };
-    case 'UPDATE_TASK_TEXT':
+    case actions.UPDATE_TASK_TEXT:
       return {
         ...state,
         taskText: actionObj.payload
@@ -32,13 +37,13 @@ function Form() {
     switch (prop) {
       case 'username':
         dispatch({
-          type: 'UPDATE_USERNAME',
+          type: actions.UPDATE_USERNAME,
           payload: value
         });
         break;
       case 'taskText':
         dispatch({
-          type: 'UPDATE_TASK_TEXT',
+          type: actions.UPDATE_TASK_TEXT,
           payload: value
         });
         break;
